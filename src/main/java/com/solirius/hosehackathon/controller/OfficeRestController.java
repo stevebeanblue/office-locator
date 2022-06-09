@@ -33,7 +33,7 @@ public class OfficeRestController {
     @GetMapping(value = "findnearest/{att}")
     public Iterable<Office> findnearest()
     {
-        return officeRepository.save(office);
+        return officeRepository.findAll();
     }
 
 }

@@ -30,10 +30,16 @@ public class OfficeRestController {
         return officeRepository.findById(id);
     }
 
-    @GetMapping(value = "findnearest/{att}")
-    public Iterable<Office> findnearest()
+    @GetMapping(value = "findnearest?{attribute}")
+//    public Iterable<Office> findnearest(@PathVariable int attribute)
+    public String findnearest(@PathVariable int attribute)
     {
-        return officeRepository.findAll();
+        int currentLocation = 41;
+        Boolean match = (currentLocation & attribute) == attribute;
+
+        String message = (match)? "matches" : "doesn't match";
+
+        return message; //officeRepository.findAll();
     }
 
 }

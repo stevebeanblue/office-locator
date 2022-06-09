@@ -5,6 +5,7 @@ import org.locationtech.jts.algorithm.distance.DiscreteHausdorffDistance;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.util.GeometryTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.solirius.hosehackathon.repository.OfficeRepository;
 
@@ -34,6 +35,8 @@ public class Calculate {
 
         Point p1 = new Point(c1, new PrecisionModel(), 4326);
         Point p2 = new Point(c2, new PrecisionModel(), 4326);
+
+        // TODO: project points to British National Grid
 
         // calculate distance
         DiscreteHausdorffDistance dhDistance = new DiscreteHausdorffDistance(p1, p2);

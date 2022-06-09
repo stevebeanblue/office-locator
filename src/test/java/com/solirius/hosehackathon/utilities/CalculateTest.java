@@ -42,7 +42,7 @@ class CalculateTest {
     @Test
     void distanceBetweenLondonAndCambridge() {
         double distance = Calculate.distance(51.5072, 0.1276, 52.1951, 0.1313);
-        assertEquals(47.53, distance, 0.01);
+        assertEquals(47.53, distance, 0.1);
     }
 
     @Disabled

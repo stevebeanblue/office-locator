@@ -36,8 +36,11 @@ public class OfficeRestController {
         return officeRepository.findById(id);
     }
 
-    @GetMapping(value = "findnearest/{attribute}")
-    public Iterable<Office> findnearest(@PathVariable int attribute)
+    @GetMapping(value = "/findnearest")
+    public Iterable<Office> findnearest(
+            @RequestParam(name="long", required=true) double longtitude,
+            @RequestParam(name="lat", required=true) double latitude,
+            @RequestParam(name="attributes", required=false) int attributes)
     {
         Iterable<Office> offices = officeRepository.findAll();
         Calculate cal = new Calculate();
@@ -45,11 +48,15 @@ public class OfficeRestController {
 
         ArrayList<Office> filteredOfficeList = new ArrayList<Office>();
 
+        double currentMinDistance = Double.MAX_VALUE;
         for (Office o : offices)
         {
-               if(cal.hasAttributes(o, attribute)){
-                   filteredOfficeList.add(o);
-               };
+            double tmpDist = Calculate.distance(latitude,longtitude,o.getLatitude(),o.getLongitude());
+            if (tmpDist < currentMinDistance
+                    && cal.hasAttributes(o, attributes)){
+                    filteredOfficeList.add(o);
+            };
+
         }
 
         return filteredOfficeList; //officeRepository.findAll();

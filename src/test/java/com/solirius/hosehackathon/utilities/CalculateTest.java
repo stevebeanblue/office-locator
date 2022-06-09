@@ -1,5 +1,6 @@
 package com.solirius.hosehackathon.utilities;
 
+import com.solirius.hosehackathon.domain.Office;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,25 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculateTest {
-@Test
-void shouldReturnMatches() {
+    @Test
+    void shouldReturnMatches() {
+        Office o = new Office(
+                -0.285419,
+                50.828782,
+                "Adur Estuary",
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                false
+        );
 
-}
+        assertEquals(true, Calculate.hasAttributes(o, 10));
+
+    }
 
 
     @Ignore

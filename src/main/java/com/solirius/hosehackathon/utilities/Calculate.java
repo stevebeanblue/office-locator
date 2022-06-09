@@ -32,7 +32,6 @@ public class Calculate {
     public static boolean hasAttributes(Office office, int attributesRequired)
     {
         int currentLocation = office.getBinaryTotal();
-        var a = "";
         Boolean match = (currentLocation & attributesRequired) == attributesRequired;
 
         return match;

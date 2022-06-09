@@ -55,6 +55,7 @@ public class OfficeRestController {
             if (tmpDist < currentMinDistance
                     && cal.hasAttributes(o, attributes)){
                     filteredOfficeList.add(o);
+                    currentMinDistance = tmpDist;
             };
 
         }

@@ -2,10 +2,16 @@ package com.solirius.hosehackathon.utilities;
 
 import com.solirius.hosehackathon.domain.Office;
 import org.hibernate.cfg.NotYetImplementedException;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.solirius.hosehackathon.repository.OfficeRepository;
 
 import java.time.Duration;
 
 public class Calculate {
+
+    @Autowired
+    private OfficeRepository officeRepository;
+
 
     /**
      *
@@ -23,7 +29,12 @@ public class Calculate {
         return 0;
     }
 
-    public static boolean hasAttributes(Office o, int attributesRequired) {
-        throw new NotYetImplementedException();
+    public static boolean hasAttributes(Office office, int attributesRequired)
+    {
+        int currentLocation = office.getBinaryTotal();
+
+        Boolean match = (currentLocation & attributesRequired) == attributesRequired;
+
+        return match;
     }
 }

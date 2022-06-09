@@ -2,11 +2,16 @@ package com.solirius.hosehackathon.controller;
 
 import com.solirius.hosehackathon.domain.Office;
 import com.solirius.hosehackathon.repository.OfficeRepository;
+import com.solirius.hosehackathon.utilities.Calculate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 @org.springframework.web.bind.annotation.RestController
@@ -14,6 +19,7 @@ public class OfficeRestController {
 
     @Autowired
     private OfficeRepository officeRepository;
+
 
     @GetMapping(value = "/offices")
     public Iterable<Office> findAll() {
@@ -30,16 +36,23 @@ public class OfficeRestController {
         return officeRepository.findById(id);
     }
 
-    @GetMapping(value = "findnearest?{attribute}")
-//    public Iterable<Office> findnearest(@PathVariable int attribute)
-    public String findnearest(@PathVariable int attribute)
+    @GetMapping(value = "findnearest/{attribute}")
+    public Iterable<Office> findnearest(@PathVariable int attribute)
     {
-        int currentLocation = 41;
-        Boolean match = (currentLocation & attribute) == attribute;
+        Iterable<Office> offices = officeRepository.findAll();
+        Calculate cal = new Calculate();
+        Calculate c = new Calculate();
 
-        String message = (match)? "matches" : "doesn't match";
+        ArrayList<Office> filteredOfficeList = new ArrayList<Office>();
 
-        return message; //officeRepository.findAll();
+        for (Office o : offices)
+        {
+               if(cal.hasAttributes(o, attribute)){
+                   filteredOfficeList.add(o);
+               };
+        }
+
+        return filteredOfficeList; //officeRepository.findAll();
     }
 
 }

@@ -15,23 +15,23 @@ public class Office {
 
     private String name;
 
-    private boolean wifi;
+    private boolean wifi; //1
 
-    private boolean extendedAccess;
+    private boolean extendedAccess; //2
 
-    private boolean meetingRooms;
+    private boolean meetingRooms; //4
 
-    private boolean kitchen;
+    private boolean kitchen; //8
 
-    private boolean breakArea;
+    private boolean breakArea; //16
 
-    private boolean petFriendly;
+    private boolean petFriendly; //32
 
-    private boolean printing;
+    private boolean printing; //64
 
-    private boolean shower;
+    private boolean shower; //128
 
-    Office() {
+    public Office() {
     }
 
     public Office(double latitude, double longitude, String name, boolean wifi, boolean extendedAccess, boolean meetingRooms, boolean kitchen, boolean breakArea, boolean petFriendly, boolean printing, boolean shower) {
@@ -46,6 +46,17 @@ public class Office {
         this.petFriendly = petFriendly;
         this.printing = printing;
         this.shower = shower;
+    }
+
+    public int getBinaryTotal(){
+        int numberOfProps = this.getClass().getDeclaredFields().length - 4;
+        int binaryVal = 1;
+
+        for (int i = 1; i < numberOfProps; i++) {
+            binaryVal =  binaryVal + binaryVal;
+        }
+
+        return binaryVal;
     }
 
     public double getLatitude() {

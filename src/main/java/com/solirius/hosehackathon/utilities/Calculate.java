@@ -35,6 +35,7 @@ public class Calculate {
         Point p1 = new Point(c1, new PrecisionModel(), 4326);
         Point p2 = new Point(c2, new PrecisionModel(), 4326);
 
+        // calculate distance
         DiscreteHausdorffDistance dhDistance = new DiscreteHausdorffDistance(p1, p2);
 
         double statuteMiles = dhDistance.distance() * 69;

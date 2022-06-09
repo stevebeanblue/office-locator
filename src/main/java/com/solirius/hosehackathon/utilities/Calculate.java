@@ -1,7 +1,10 @@
 package com.solirius.hosehackathon.utilities;
 
 import com.solirius.hosehackathon.domain.Office;
-import org.hibernate.cfg.NotYetImplementedException;
+import org.locationtech.jts.algorithm.distance.DiscreteHausdorffDistance;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.solirius.hosehackathon.repository.OfficeRepository;
 
@@ -26,7 +29,17 @@ public class Calculate {
 
     public static double distance(double lat1, double lon1, double lat2, double lon2) {
         //Calculate distance
-        return 0;
+        Coordinate c1 = new Coordinate(lat1, lon1);
+        Coordinate c2 = new Coordinate(lat2, lon2);
+
+        Point p1 = new Point(c1, new PrecisionModel(), 4326);
+        Point p2 = new Point(c2, new PrecisionModel(), 4326);
+
+        DiscreteHausdorffDistance dhDistance = new DiscreteHausdorffDistance(p1, p2);
+
+        double statuteMiles = dhDistance.distance() * 69;
+
+        return statuteMiles;
     }
 
     public static boolean hasAttributes(Office office, int attributesRequired)

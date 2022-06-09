@@ -38,7 +38,7 @@ class CalculateTest {
         assertEquals(0, distance);
     }
 
-    @Disabled
+
     @Test
     void distanceBetweenLondonAndCambridge() {
         double distance = Calculate.distance(51.5072, 0.1276, 52.1951, 0.1313);

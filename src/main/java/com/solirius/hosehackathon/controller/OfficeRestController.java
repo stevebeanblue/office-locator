@@ -29,4 +29,11 @@ public class OfficeRestController {
     public Optional<Office> findById(@PathVariable Long id) {
         return officeRepository.findById(id);
     }
+
+    @GetMapping(value = "findnearest/{att}")
+    public Iterable<Office> findnearest()
+    {
+        return officeRepository.save(office);
+    }
+
 }
